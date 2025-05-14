@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Classes\Blocks;
 use App\Filament\Resources\DashboardBlocksResource\Pages;
 use App\Filament\Resources\DashboardBlocksResource\RelationManagers;
 use App\Models\DashboardBlock;
@@ -34,19 +35,13 @@ class DashboardBlocksResource extends Resource
 
                         Forms\Components\Select::make('block')
                             ->required()
-                            ->options([
-                                'agenda' => 'Agenda',
-                                'statistieken' => 'Statistieken',
-                                'snelle_info' => 'Snelle Info',
-                                'meldingen' => 'Meldingen',
-                                'custom' => 'Aangepast'
-                            ])
+                            ->options(Blocks::getBlocks())
                             ->label('Bloktype')
                             ->columnSpan(2),
 
                         Forms\Components\Select::make('width')
                             ->required()
-                            ->default(3)
+                            ->default(1)
                             ->options([
                                 1 => '1 breed (smal)',
                                 2 => '2 breed (standaard)',
