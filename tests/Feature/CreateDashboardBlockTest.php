@@ -18,13 +18,14 @@ class CreateDashboardBlockTest extends TestCase
 
         $block = DashboardBlock::create([
             'name' => 'Test Widget',
-            'widget_class' => 'App\\Livewire\\RevenueWidget',
+            'block' => 'App\\Livewire\\RevenueWidget', // <- essentieel
+            'width' => 3,
             'order' => 1,
         ]);
 
         $this->assertDatabaseHas('dashboard_blocks', [
             'name' => 'Test Widget',
-            'widget_class' => 'App\\Livewire\\RevenueWidget',
+            'block' => 'App\\Livewire\\RevenueWidget',
         ]);
     }
 }

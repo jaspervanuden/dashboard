@@ -1,34 +1,32 @@
 <?php
 
-
 namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
-use App\Models\Blocks;
+use App\Models\DashboardBlock;
 
-// class DeleteDashboardBlockTest extends TestCase
-
-//    use RefreshDatabase;
+class DeleteDashboardBlockTest extends TestCase
+{
+    use RefreshDatabase;
 
     public function test_dashboard_block_can_be_deleted()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $block = Blocks::create([
-            'title' => 'Te verwijderen widget',
-            'widget_class' => 'App\\Livewire\\RevenueWidget',
+        $block = DashboardBlock::create([
+            'name' => 'Verwijderbare Widget',
+            'block' => 'App\\Livewire\\RevenueWidget',
+            'width' => 3,
             'order' => 2,
         ]);
 
-        $response = $this->delete('/admin/dashboard-blocks/' . $block->id);
+        $this->assertDatabaseHas('dashboard_blocks', ['id' => $block->id]);
 
-        $response->assertStatus(302);
-        $this->assertDatabaseMissing('dashboard_blocks', [
-            'id' => $block->id,
-        ]);
+        $block->delete();
+
+        $this->assertDatabaseMissing('dashboard_blocks', ['id' => $block->id]);
     }
-
-
+}

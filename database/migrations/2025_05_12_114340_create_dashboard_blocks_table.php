@@ -1,31 +1,25 @@
 <?php
 
-namespace Tests\Feature;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
-use App\Models\DashboardBlock;
-
-class CreateDashboardBlockTest extends TestCase
+return new class extends Migration
 {
-    use RefreshDatabase;
-
-    public function test_dashboard_block_can_be_created_directly()
+    public function up(): void
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        $block = DashboardBlock::create([
-            'name' => 'Omzet van vandaag',
-            'block' => 'App\\Livewire\\RevenueWidget',
-            'width' => 3,
-            'order' => 1,
-        ]);
-
-        $this->assertDatabaseHas('dashboard_blocks', [
-            'name' => 'Omzet van vandaag',
-            'block' => 'App\\Livewire\\RevenueWidget',
-        ]);
+        Schema::create('dashboard_blocks', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('block');
+            $table->integer('width')->default(3);
+            $table->integer('order')->default(1);
+            $table->timestamps();
+        });
     }
-}
+
+    public function down(): void
+    {
+        Schema::dropIfExists('dashboard_blocks');
+    }
+};
