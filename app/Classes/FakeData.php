@@ -28,7 +28,8 @@ class FakeData
     {
         return rand(1000, 10000);
     }
-    public static function getOrdersChartData(): array
+
+    public static function getWeekOrdersChartData(): array
     {
         $labels = ['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'];
         $data = [];
@@ -42,5 +43,4 @@ class FakeData
             'data' => $data,
         ];
     }
-
 }

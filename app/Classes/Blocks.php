@@ -3,7 +3,7 @@
 namespace App\Classes;
 
 use App\Livewire\RevenueWidget;
-use App\Livewire\OrdersWidget;
+use App\Livewire\WeekOrdersWidget;
 use App\Livewire\VisitorsWidget;
 use App\Livewire\ConversionRateWidget;
 use App\Livewire\ReturnsWidget;
@@ -15,7 +15,7 @@ class Blocks{
     {
         return [
             RevenueWidget::class => 'Omzet van vandaag',
-            OrdersWidget::class => 'Aantal bestellingen',
+            WeekOrdersWidget::class => 'Aantal bestellingen deze week',
             VisitorsWidget::class => 'Aantal bezoekers',
             ConversionRateWidget::class => 'Conversieratio',
             ReturnsWidget::class => 'Aantal retouren',

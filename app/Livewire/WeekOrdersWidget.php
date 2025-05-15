@@ -5,13 +5,26 @@ namespace App\Livewire;
 use App\Classes\FakeData;
 use Filament\Widgets\ChartWidget;
 
-class OrdersWidget extends ChartWidget
+class WeekOrdersWidget extends ChartWidget
 {
     protected static ?string $heading = 'Bestellingen';
+    public $name;
+    public $width;
+
+    public function mount($name = 'Omzet', $width = 1): void
+    {
+        $this->name = $name;
+        $this->width = $width;
+    }
+
+    public function getColumnSpan(): int|string|array
+    {
+        return $this->width;
+    }
 
     protected function getData(): array
     {
-        $chartData = FakeData::getOrdersChartData();
+        $chartData = FakeData::getWeekOrdersChartData();
 
         return [
             'datasets' => [
@@ -29,4 +42,6 @@ class OrdersWidget extends ChartWidget
     {
         return 'bar'; // Of 'line', 'pie', etc.
     }
+
+
 }
