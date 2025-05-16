@@ -2,6 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Livewire\ConversionRateWidget;
+use App\Livewire\RevenueWidget;
+use App\Livewire\NewCustomersWidget;
+use App\Livewire\WeekOrdersWidget;
+use App\Livewire\ReturnsWidget;
+use App\Livewire\VisitorsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;

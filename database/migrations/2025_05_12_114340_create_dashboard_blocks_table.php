@@ -6,28 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('dashboard_blocks', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
             $table->string('block');
-            $table->integer('width')
-                ->default(3);
-            $table->integer('order')
-                ->default(1);
-
+            $table->integer('width')->default(3);
+            $table->integer('order')->default(1);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('dashboard_blocks');
