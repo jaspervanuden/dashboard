@@ -1,32 +1,32 @@
 <?php
 
-
 namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
-use App\Models\Blocks;
+use App\Models\DashboardBlock;
 
-class LoadDashboardWidgetsTest extends TestCase
+class LoadDashboardBlockTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_widgets_load_on_dashboard()
+    public function test_dashboard_block_is_visible_on_dashboard_page()
     {
+        // Maak gebruiker aan (zonder is_admin)
         $user = User::factory()->create();
+
         $this->actingAs($user);
 
-        Blocks::create([
-            'title' => 'Omzet van vandaag',
-            'widget_class' => 'App\\Livewire\\RevenueWidget',
+        DashboardBlock::create([
+            'name' => 'Test Widget',
+            'block' => 'App\\Livewire\\RevenueWidget',
+            'width' => 3,
             'order' => 1,
         ]);
 
         $response = $this->get('/admin');
-
         $response->assertStatus(200);
-        $response->assertSee('Omzet van vandaag');
+        $response->assertSee('Test Widget');
     }
 }
-
